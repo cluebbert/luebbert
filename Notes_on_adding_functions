@@ -1,0 +1,12 @@
+#### How to add functions ####
+
+good tutorial: https://combine-australia.github.io/r-pkg-dev/
+
+1) library(devtools)
+2) use_r("name_of_new_function")
+3) define function in .R file created, save.
+4) to add documentation, while clicked inside function, use "Ctrl+Alt+Shift+R" or click >Code>Insert Roxygen Skeleton. save.
+5) create test script using "use_test" while in .R file. (optional)
+6) run 'check()', to make sure everything looks good.
+7) commit and push changes to github.
+
