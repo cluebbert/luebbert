@@ -7,6 +7,6 @@ good tutorial: https://combine-australia.github.io/r-pkg-dev/
 3) define function in .R file created, save.
 4) to add documentation, while clicked inside function, use "Ctrl+Alt+Shift+R" or click >Code>Insert Roxygen Skeleton. save.
 5) create test script using "use_test" while in .R file. (optional)
-6) run 'check()', to make sure everything looks good.
+6) run 'devtools::check()', to make sure everything looks good.
 7) commit and push changes to github.
 
