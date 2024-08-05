@@ -16,4 +16,6 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     ggplot2,
-    lme4
+    lme4,
+    corrplot,
+    khroma
