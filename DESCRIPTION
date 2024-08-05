@@ -18,4 +18,6 @@ Imports:
     ggplot2,
     lme4,
     corrplot,
-    khroma
+    khroma,
+    grDevices,
+    stats
