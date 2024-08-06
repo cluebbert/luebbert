@@ -10,3 +10,5 @@ good tutorial: https://combine-australia.github.io/r-pkg-dev/
 6) run 'devtools::check()', to make sure everything looks good.
 7) commit and push changes to github.
 
+Note:
+If check flags some imported functions as needed added to the NAMESPACE file use function 'usethis::use_import_from()' to add this.
