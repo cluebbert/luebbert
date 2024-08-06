@@ -2,8 +2,30 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom dplyr %>%
+#' @importFrom dplyr distinct
+#' @importFrom dplyr filter
+#' @importFrom dplyr left_join
+#' @importFrom dplyr mutate
+#' @importFrom dplyr rename
+#' @importFrom dplyr select
+#' @importFrom factoextra get_pca_var
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 coord_flip
+#' @importFrom ggplot2 element_blank
+#' @importFrom ggplot2 element_text
+#' @importFrom ggplot2 facet_wrap
+#' @importFrom ggplot2 geom_bar
+#' @importFrom ggplot2 geom_label
+#' @importFrom ggplot2 labs
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 theme_bw
 #' @importFrom grDevices dev.off
 #' @importFrom grDevices png
+#' @importFrom reshape2 melt
+#' @importFrom rlang .data
 #' @importFrom stats cor
+#' @importFrom stringr str_extract
+#' @importFrom stringr str_replace
 ## usethis namespace: end
 NULL
