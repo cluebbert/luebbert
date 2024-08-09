@@ -10,7 +10,8 @@ memesave(
   units = "in",
   height = 10,
   width = 15,
-  bg = "white"
+  bg = "white",
+  ...
 )
 }
 \arguments{

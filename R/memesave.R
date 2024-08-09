@@ -6,6 +6,7 @@
 #' @param height some sensible and large default
 #' @param width see height
 #' @param bg no transparent background pngs
+#' @param ... extra arguments passed to ggplot2::ggsave()
 #'
 #' @return write plot
 #' @export
@@ -16,7 +17,8 @@ memesave <- function(myfilename,
                      units = "in",
                      height = 10,
                      width = 15,
-                     bg = "white"){
+                     bg = "white",
+                     ...){
   if(device == "png"){
     ggplot2::ggsave(filename = myfilename,
                     device = "png",
@@ -24,13 +26,15 @@ memesave <- function(myfilename,
                     height = height,
                     width = width,
                     units = units,
-                    bg = bg)
+                    bg = bg,
+                    ...)
   } else {
     ggplot2::ggsave(filename = myfilename,
                     device = device,
                     height = height,
                     width = width,
                     units = units,
-                    bg = bg)
+                    bg = bg,
+                    ...)
   }
 }
