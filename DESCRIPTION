@@ -13,14 +13,20 @@ Imports:
     corrplot,
     dplyr,
     factoextra,
+    ggfittext,
     ggplot2,
     grDevices,
     khroma,
     lme4,
+    patchwork,
     reshape2,
     rlang,
+    scales,
     stats,
-    stringr
+    stringr,
+    tibble,
+    utils,
+    viridis
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

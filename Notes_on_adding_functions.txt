@@ -11,4 +11,8 @@ good tutorial: https://combine-australia.github.io/r-pkg-dev/
 7) commit and push changes to github.
 
 Note:
-If check flags some imported functions as needed added to the NAMESPACE file use function 'usethis::use_import_from()' to add this.
+- If check flags some imported functions as needed added to the NAMESPACE file use function 'usethis::use_import_from()' to add this.
+- To use package::some_function use usethis::use_package("packagename")
+- inside ggplot when would normally just use column name unquoted, use .data$column_name
+- for dplyr::select use "column_name", do this also for rename "name" = "name"
+
