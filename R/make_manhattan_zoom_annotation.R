@@ -42,7 +42,7 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
       # get info for hit from farmcpu output
       this.top.hit <- filter(top.hits, .data$SNP == this.snp.name)
 
-      make_ld(this.snp.name, window, geno.bed, "/scratch/inputs/")
+      luebbert::make_ld(this.snp.name, window, geno.bed, "/scratch/inputs/")
 
       ld.table <- read.table("/scratch/inputs/ld_out_temp.ld", header = T)
       ld.table_sub <- ld.table %>%
@@ -119,13 +119,13 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
                                      TRUE ~ paste0(.data$GeneNameShort, ", ", .data$Description))) %>%
         filter(.data$CHROM == this.chr) %>%
         rowwise() %>%
-        mutate(dist.from.snp = get.gene.dist.from.snp(this.pos, .data$start, .data$end)) %>%
+        mutate(dist.from.snp = luebbert::get_gene_dist_from_snp(this.pos, .data$start, .data$end)) %>%
         filter(.data$dist.from.snp <= window * 1000)
 
       anno.spread <- anno.sub %>%
-        add_column(y.pos = get.gene.y.pos(min(plot.limits.ex),
-                                          max(plot.limits.ex),
-                                          nrow(anno.sub)))
+        add_column(y.pos = luebbert::get_gene_y_pos(min(plot.limits.ex),
+                                                    max(plot.limits.ex),
+                                                    nrow(anno.sub)))
 
       mid <- this.top.hit$POS
       breaks.anno <- seq(from = mid - window * 1000,
@@ -159,7 +159,7 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
                                   hjust = 0,
                                   padding.y = grid::unit(.1, "lines"),
                                   min.size = text.min.size) +
-        geom_segment(aes(x = .5, xend = .55, y = start, yend = .data$y.pos)) +
+        geom_segment(aes(x = .5, xend = .55, y = .data$start, yend = .data$y.pos)) +
         theme(axis.text.x = element_blank(),
               axis.title.x = element_blank(),
               #axis.text.y = element_blank(),
