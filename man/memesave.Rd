@@ -26,6 +26,8 @@ memesave(
 \item{width}{see height}
 
 \item{bg}{no transparent background pngs}
+
+\item{...}{extra arguments passed to ggplot2::ggsave()}
 }
 \value{
 write plot
