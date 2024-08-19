@@ -10,6 +10,7 @@ License: MIT + file LICENSE
 URL: https://github.com/cluebbert/luebbert
 BugReports: https://github.com/cluebbert/luebbert/issues
 Imports: 
+    bigsnpr,
     corrplot,
     dplyr,
     factoextra,
