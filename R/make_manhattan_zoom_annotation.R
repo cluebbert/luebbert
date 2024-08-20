@@ -3,7 +3,7 @@
 #' @param out.dir where to output plots
 #' @param plot.type png or pdf?
 #' @param trait.name character string of name of trait
-#' @param top.hits table of top hits with columns CHROM, POS, and pvalue column
+#' @param top.hits table of top hits with columns CHROM, POS, and PVAL column, p-value is log transformed in function so should not be pre-transformed
 #' @param gwas.res table of all gwas results, whats plotted
 #' @param window window in KB to plot in
 #' @param geno.bed prefix of bed file, character string
@@ -15,6 +15,7 @@
 #' @export
 #'
 #' @examples
+#' # no example
 make_manhattan_zoom_annotation <- function(out.dir = "./",
                                            plot.type = c("png", "pdf"),
                                            trait.name,
@@ -81,7 +82,7 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
         ggplot(aes(x = .data$POS, y = .data$logpval), data = plot.df) +
         geom_point(aes(color = .data$plot.R2, alpha = .data$how.to.plot), shape = 16) +
         scale_alpha(guide = "none") +
-        geom_point(aes(x = .data$POS, y = -log10(.data[[paste0(trait.name, ".FarmCPU")]])),
+        geom_point(aes(x = .data$POS, y = -log10(.data[["PVAL"]])),
                    data = this.top.hit,
                    fill = "red", size = 4, shape = 23) +
         scale_color_stepsn(colors = my.colors, name = "R2") +

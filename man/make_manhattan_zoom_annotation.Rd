@@ -24,7 +24,7 @@ make_manhattan_zoom_annotation(
 
 \item{trait.name}{character string of name of trait}
 
-\item{top.hits}{table of top hits with columns CHROM, POS, and pvalue column}
+\item{top.hits}{table of top hits with columns CHROM, POS, and PVAL column, p-value is log transformed in function so should not be pre-transformed}
 
 \item{gwas.res}{table of all gwas results, whats plotted}
 
@@ -43,4 +43,7 @@ outputs 1 plot per row of top.hits table
 }
 \description{
 Title Make a manhattan in a region and label genes and LD for a table of top gwas hits
+}
+\examples{
+# no example
 }
