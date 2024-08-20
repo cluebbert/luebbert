@@ -187,6 +187,6 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
       dev.off()
     }
   } else {
-    write.table("NO SIGNALS", file = paste0(out.dir, "/NO_SIGNIFICANT_SIGNALS_for_SUBSET_", trait.name, ".txt"))
+    write.table("NO SIGNALS", file = paste0(out.dir, "/NO_SIGNIFICANT_SIGNALS_for_", trait.name, ".txt"))
   }
 }
