@@ -14,7 +14,8 @@ make_manhattan_zoom_annotation(
   geno.bed,
   plot.r2.thresh,
   file.prefix = "",
-  annotation.table
+  annotation.table,
+  gene.highlight
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ make_manhattan_zoom_annotation(
 \item{file.prefix}{optional label for output files}
 
 \item{annotation.table}{table with gene descriptions and start/stop, currently only supports a specific table from maize}
+
+\item{gene.highlight}{name of column that indicates which genes to highlight, column should be boolean, T is displayed red}
 }
 \value{
 outputs 1 plot per row of top.hits table

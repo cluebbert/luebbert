@@ -10,6 +10,7 @@
 #' @param plot.r2.thresh minimum LD to plot
 #' @param file.prefix optional label for output files
 #' @param annotation.table table with gene descriptions and start/stop, currently only supports a specific table from maize
+#' @param gene.highlight name of column that indicates which genes to highlight, column should be boolean, T is displayed red
 #'
 #' @return outputs 1 plot per row of top.hits table
 #' @export
@@ -25,7 +26,8 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
                                            geno.bed,
                                            plot.r2.thresh,
                                            file.prefix = "",
-                                           annotation.table){
+                                           annotation.table,
+                                           gene.highlight){
   if(nrow(top.hits) > 0){
     if(plot.type == "pdf"){
       pdf(paste0(out.dir, trait.name, "_GwasGeneAnnotation.pdf"),
@@ -45,7 +47,7 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
 
       luebbert::make_ld(this.snp.name, window, geno.bed)
 
-      ld.table <- read.table("/scratch/inputs/ld_out_temp.ld", header = T)
+      ld.table <- read.table("./ld_out_temp.ld", header = T)
       ld.table_sub <- ld.table %>%
         select("SNP" = "SNP_B", "R2")
 
@@ -113,9 +115,17 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
 
 
       # make gene plot
-      anno.sub <- annotation.table %>%
-        select("GeneID", "CHROM", "start", "end",
-               "Description", "GeneNameShort") %>%
+      if(missing(gene.highlight)){
+        x <- annotation.table %>%
+          select("GeneID", "CHROM", "start", "end",
+                 "Description", "GeneNameShort")
+      } else {
+        x <- annotation.table %>%
+          select("GeneID", "CHROM", "start", "end",
+                 "Description", "GeneNameShort", .data[[gene.highlight]])
+      }
+
+      anno.sub <- x %>%
         mutate(plot_name = case_when(is.na(.data$GeneNameShort) ~ .data$Description,
                                      TRUE ~ paste0(.data$GeneNameShort, ", ", .data$Description))) %>%
         filter(.data$CHROM == this.chr) %>%
@@ -154,18 +164,38 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
         #           nudge_x = .05,
         #           hjust = 0,
         #           size = 2) +
-        ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = .data$y.pos, label = paste0(.data$plot_name)),
-                                  place = "left",
-                                  #grow = TRUE,
-                                  hjust = 0,
-                                  padding.y = grid::unit(.1, "lines"),
-                                  min.size = text.min.size) +
+        # ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = .data$y.pos, label = paste0(.data$plot_name)),
+        #                          place = "left",
+        #                          #grow = TRUE,
+        #                          hjust = 0,
+        #                          padding.y = grid::unit(.1, "lines"),
+        #                          min.size = text.min.size) +
         geom_segment(aes(x = .5, xend = .55, y = .data$start, yend = .data$y.pos)) +
         theme(axis.text.x = element_blank(),
               axis.title.x = element_blank(),
               #axis.text.y = element_blank(),
               axis.title.y = element_blank(),
               panel.grid = element_blank())
+
+      if(missing(gene.highlight)){
+        anno <- anno +
+          ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = .data$y.pos, label = paste0(.data$plot_name)),
+                                   place = "left",
+                                   #grow = TRUE,
+                                   hjust = 0,
+                                   padding.y = grid::unit(.1, "lines"),
+                                   min.size = text.min.size)
+      } else {
+        anno <- anno +
+          ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = .data$y.pos, label = paste0(.data$plot_name),
+                                       color = .data[[gene.highlight]]),
+                                   place = "left",
+                                   #grow = TRUE,
+                                   hjust = 0,
+                                   padding.y = grid::unit(.1, "lines"),
+                                   min.size = text.min.size) +
+          scale_color_manual(guide="none", values = c("black", "red"))
+      }
 
       out.plot <- man + ldsmooth + anno +
         patchwork::plot_layout(nrow = 1, widths = c(3,1,6)) +
@@ -189,4 +219,6 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
   } else {
     write.table("NO SIGNALS", file = paste0(out.dir, "/NO_SIGNIFICANT_SIGNALS_for_", trait.name, ".txt"))
   }
+  # clean up temp ld file
+  system("rm ./ld_out_temp*")
 }
