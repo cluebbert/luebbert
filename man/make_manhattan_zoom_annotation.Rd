@@ -30,7 +30,7 @@ make_manhattan_zoom_annotation(
 
 \item{window}{window in KB to plot in}
 
-\item{geno.bed}{prefix of bed file, character string}
+\item{geno.bed}{path to bed file, no .bed extension, character string}
 
 \item{plot.r2.thresh}{minimum LD to plot}
 

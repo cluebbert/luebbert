@@ -4,18 +4,16 @@
 \alias{make_ld}
 \title{Title Make a table of LD around a certain snp}
 \usage{
-make_ld(snp.name, window = 1000, bedfile, in.dir, out.filename = "ld_out_temp")
+make_ld(snp.name, window = 1000, bedfile, out.filepath = "./ld_out_temp")
 }
 \arguments{
 \item{snp.name}{Name of snp around which to calculate LD}
 
 \item{window}{Window around snp in KB}
 
-\item{bedfile}{bedfile prefix, no .bed extension}
+\item{bedfile}{bedfile path, no .bed extension}
 
-\item{in.dir}{where the bedfile lives}
-
-\item{out.filename}{name of outfile, will be placed in in.dir}
+\item{out.filepath}{path of outfile}
 }
 \value{
 outputs table of LD, for use within plotting function mostly

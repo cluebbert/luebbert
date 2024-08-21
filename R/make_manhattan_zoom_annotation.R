@@ -6,7 +6,7 @@
 #' @param top.hits table of top hits with columns CHROM, POS, and PVAL column, p-value is log transformed in function so should not be pre-transformed
 #' @param gwas.res table of all gwas results, whats plotted
 #' @param window window in KB to plot in
-#' @param geno.bed prefix of bed file, character string
+#' @param geno.bed path to bed file, no .bed extension, character string
 #' @param plot.r2.thresh minimum LD to plot
 #' @param file.prefix optional label for output files
 #' @param annotation.table table with gene descriptions and start/stop, currently only supports a specific table from maize
@@ -43,7 +43,7 @@ make_manhattan_zoom_annotation <- function(out.dir = "./",
       # get info for hit from farmcpu output
       this.top.hit <- filter(top.hits, .data$SNP == this.snp.name)
 
-      luebbert::make_ld(this.snp.name, window, geno.bed, "/scratch/inputs/")
+      luebbert::make_ld(this.snp.name, window, geno.bed)
 
       ld.table <- read.table("/scratch/inputs/ld_out_temp.ld", header = T)
       ld.table_sub <- ld.table %>%
