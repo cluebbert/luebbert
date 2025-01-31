@@ -67,8 +67,8 @@ make_manhattan <- function(df, chrom.col, pos.col, pval.col, pval.in.log = F, bo
     scale_color_manual(values = c("gray38", "gray61")) +
     theme_bw() +
     scale_x_continuous(name = "Chromosome",
-                       breaks = .data$xbreaks,
-                       labels = .data$xlabs) +
+                       breaks = xbreaks,
+                       labels = xlabs) +
     theme(legend.position = "none",
           axis.text = element_text(size = 30),
           axis.title.y = element_text(size = 32),
