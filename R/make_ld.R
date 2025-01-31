@@ -1,4 +1,4 @@
-#' Title Make a table of LD around a certain snp
+#' Make a table of LD around a certain snp
 #'
 #' @param snp.name Name of snp around which to calculate LD
 #' @param window Window around snp in KB

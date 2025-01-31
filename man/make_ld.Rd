@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_ld.R
 \name{make_ld}
 \alias{make_ld}
-\title{Title Make a table of LD around a certain snp}
+\title{Make a table of LD around a certain snp}
 \usage{
 make_ld(snp.name, window = 1000, bedfile, out.filepath = "./ld_out_temp")
 }
@@ -19,7 +19,7 @@ make_ld(snp.name, window = 1000, bedfile, out.filepath = "./ld_out_temp")
 outputs table of LD, for use within plotting function mostly
 }
 \description{
-Title Make a table of LD around a certain snp
+Make a table of LD around a certain snp
 }
 \examples{
 # No example

@@ -10,7 +10,7 @@
 #' @examples # no example
 #'
 rite_text_file <- function(filename, data){
-  output.file <- file(paste0(filename,".txt"), "wb")
+  output.file <- file(filename, "wb")
   f <- data
   cat(f, file = output.file, sep = "\n")
   close(output.file)
