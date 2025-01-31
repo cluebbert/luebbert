@@ -7,12 +7,13 @@
 #' @param pval.in.log boolean - is pvalue column log10 or not
 #' @param bonf.cutoff significance cutoff
 #' @param smoothing.cutoff minimum pvalue to plot to reduce size of plot
+#' @param highlight.df optional - dataframe in same format as input that has snps to highlight
 #'
 #' @return manhattan plot
 #' @export
 #'
 #' @examples
-make_manhattan <- function(df, chrom.col, pos.col, pval.col, pval.in.log = F, bonf.cutoff, smoothing.cutoff){
+make_manhattan <- function(df, chrom.col, pos.col, pval.col, pval.in.log = F, bonf.cutoff, smoothing.cutoff, highlight.df = NULL){
   # format input
   gwas.dat <- df %>%
     select(all_of(c(chrom.col, pos.col, pval.col))) %>%
@@ -77,5 +78,6 @@ make_manhattan <- function(df, chrom.col, pos.col, pval.col, pval.in.log = F, bo
           panel.grid.major.x = element_blank()) +
     labs(y = logobj)
 
-  return(p)
+
+  return(list(plot = p, table = plot.df))
 }

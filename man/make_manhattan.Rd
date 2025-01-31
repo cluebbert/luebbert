@@ -11,7 +11,8 @@ make_manhattan(
   pval.col,
   pval.in.log = F,
   bonf.cutoff,
-  smoothing.cutoff
+  smoothing.cutoff,
+  highlight.df = NULL
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ make_manhattan(
 \item{bonf.cutoff}{significance cutoff}
 
 \item{smoothing.cutoff}{minimum pvalue to plot to reduce size of plot}
+
+\item{highlight.df}{optional - dataframe in same format as input that has snps to highlight}
 }
 \value{
 manhattan plot
