@@ -11,11 +11,10 @@
 make_manhattan_offsets <- function(df, chrom.col, pos.col){
   df.sub <- df %>%
     select(one_of(chrom.col, pos.col)) %>%
-    rename("chrom.col" = "chrom.col",
-           "pos.col" = "pos.col")
+    setNames("chrom.col", "pos.col")
 
   offset.table <- df.sub %>%
-    group_by(chrom.col) %>%
+    group_by(.data$chrom.col) %>%
     mutate(max.pos = max(.data$pos.col)) %>%
     select(-"pos.col") %>%
     distinct() %>%
