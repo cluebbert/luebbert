@@ -15,7 +15,7 @@
 make_manhattan <- function(df, chrom.col, pos.col, pval.col, pval.in.log = F, bonf.cutoff, smoothing.cutoff){
   # format input
   gwas.dat <- df %>%
-    select(all_of(c("chrom.col", "pos.col", "pval.col"))) %>%
+    select(all_of(c(chrom.col, pos.col, pval.col))) %>%
     setNames(c("chromosome", "physical.pos", "pval"))
 
   # gwas.dat <- df %>%
