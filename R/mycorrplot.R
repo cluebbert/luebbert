@@ -19,7 +19,6 @@ mycorrplot <- function(dat,
                        axis.text.size = 1,
                        coef.text.size = 1,
                        color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
-                       output.png = F,
                        out.file.png = NULL,
                        pvalthresh = .05){
 
@@ -29,7 +28,7 @@ mycorrplot <- function(dat,
 
   p.mat <- corrplot::cor.mtest(dat, use = use)$p
 
-  if(output.png){
+  if(!is.null(out.file.png)){
     png(out.file.png,
         units = "in",
         height = 8, width = 8,
