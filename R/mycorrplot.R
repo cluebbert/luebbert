@@ -20,7 +20,8 @@ mycorrplot <- function(dat,
                        coef.text.size = 1,
                        color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
                        output.png = F,
-                       out.file.png = NULL){
+                       out.file.png = NULL,
+                       pvalthresh = .05){
 
   color.scheme <- match.arg(color.scheme)
   corr.colors <- khroma::color(color.scheme)
@@ -41,7 +42,7 @@ mycorrplot <- function(dat,
                        addCoef.col = "black", # Add coefficient of correlation
                        tl.col="black", tl.srt=45, #Text label color and rotation
                        # Combine with significance
-                       p.mat = p.mat, sig.level = 0.05, insig = "blank",
+                       p.mat = p.mat, sig.level = pvalthresh, insig = "blank",
                        # hide correlation coefficient on the principal diagonal
                        diag=FALSE,
                        tl.cex = axis.text.size,
@@ -58,7 +59,7 @@ mycorrplot <- function(dat,
                        addCoef.col = "black", # Add coefficient of correlation
                        tl.col="black", tl.srt=45, #Text label color and rotation
                        # Combine with significance
-                       p.mat = p.mat, sig.level = 0.05, insig = "blank",
+                       p.mat = p.mat, sig.level = pvalthresh, insig = "blank",
                        # hide correlation coefficient on the principal diagonal
                        diag=FALSE,
                        tl.cex = axis.text.size,
