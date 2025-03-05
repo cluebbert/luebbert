@@ -26,7 +26,7 @@ mycorrplot <- function(dat,
   corr.colors <- khroma::color(color.scheme)
   m <- cor(dat, use = use)
 
-  p.mat <- corrplot::cor.mtest(m, use = use)$p
+  p.mat <- corrplot::cor.mtest(dat, use = use)$p
 
   if(output.png){
     png(out.file.png,
