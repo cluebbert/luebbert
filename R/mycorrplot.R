@@ -7,8 +7,8 @@
 #' @param axis.text.size size of trait labels in plot
 #' @param coef.text.size size of correlation coefficient labels in plot
 #' @param color.scheme which color scheme to use, diverging schemes from khroma package
-#' @param output.png output corrplot as png?
 #' @param out.file.png where to output png file
+#' @param pvalthresh threshold for significance
 #'
 #' @return prints visualization of correlation plot
 #' @export

@@ -10,8 +10,8 @@ mycorrplot(
   axis.text.size = 1,
   coef.text.size = 1,
   color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
-  output.png = F,
-  out.file.png = NULL
+  out.file.png = NULL,
+  pvalthresh = 0.05
 )
 }
 \arguments{
@@ -25,9 +25,9 @@ mycorrplot(
 
 \item{color.scheme}{which color scheme to use, diverging schemes from khroma package}
 
-\item{output.png}{output corrplot as png?}
-
 \item{out.file.png}{where to output png file}
+
+\item{pvalthresh}{threshold for significance}
 }
 \value{
 prints visualization of correlation plot
