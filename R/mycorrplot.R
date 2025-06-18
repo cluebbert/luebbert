@@ -9,6 +9,7 @@
 #' @param color.scheme which color scheme to use, diverging schemes from khroma package
 #' @param out.file.png where to output png file
 #' @param pvalthresh threshold for significance
+#' @param add.coef plot coefficient or not
 #'
 #' @return prints visualization of correlation plot
 #' @export
@@ -17,11 +18,12 @@
 mycorrplot <- function(dat,
                        use = "pairwise.complete",
                        axis.text.size = 1,
+                       add.coef = F,
                        coef.text.size = 1,
                        color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
                        out.file.png = NULL,
                        pvalthresh = .05){
-
+  coef.state <- ifelse(add.coef, 'black', NULL)
   color.scheme <- match.arg(color.scheme)
   corr.colors <- khroma::color(color.scheme)
   m <- cor(dat, use = use)
@@ -38,7 +40,7 @@ mycorrplot <- function(dat,
                        col=corr.colors(8),
                        type="full",
                        order="original",
-                       addCoef.col = "black", # Add coefficient of correlation
+                       addCoef.col = coef.state, # Add coefficient of correlation
                        tl.col="black", tl.srt=45, #Text label color and rotation
                        # Combine with significance
                        p.mat = p.mat, sig.level = pvalthresh, insig = "blank",
@@ -55,7 +57,7 @@ mycorrplot <- function(dat,
                        col=corr.colors(8),
                        type="full",
                        order="original",
-                       addCoef.col = "black", # Add coefficient of correlation
+                       addCoef.col = coef.state, # Add coefficient of correlation
                        tl.col="black", tl.srt=45, #Text label color and rotation
                        # Combine with significance
                        p.mat = p.mat, sig.level = pvalthresh, insig = "blank",

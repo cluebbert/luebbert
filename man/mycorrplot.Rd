@@ -8,6 +8,7 @@ mycorrplot(
   dat,
   use = "pairwise.complete",
   axis.text.size = 1,
+  add.coef = F,
   coef.text.size = 1,
   color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
   out.file.png = NULL,
@@ -20,6 +21,8 @@ mycorrplot(
 \item{use}{how to deal with missing data in correlation, default is pairwise complete}
 
 \item{axis.text.size}{size of trait labels in plot}
+
+\item{add.coef}{plot coefficient or not}
 
 \item{coef.text.size}{size of correlation coefficient labels in plot}
 
