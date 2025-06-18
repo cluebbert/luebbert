@@ -12,7 +12,8 @@ mycorrplot(
   coef.text.size = 1,
   color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
   out.file.png = NULL,
-  pvalthresh = 0.05
+  pvalthresh = 0.05,
+  ...
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ mycorrplot(
 \item{out.file.png}{where to output png file}
 
 \item{pvalthresh}{threshold for significance}
+
+\item{...}{extra options passed to corrplot::corrplot}
 }
 \value{
 prints visualization of correlation plot

@@ -10,6 +10,7 @@
 #' @param out.file.png where to output png file
 #' @param pvalthresh threshold for significance
 #' @param add.coef plot coefficient or not
+#' @param ... extra options passed to corrplot::corrplot
 #'
 #' @return prints visualization of correlation plot
 #' @export
@@ -22,7 +23,8 @@ mycorrplot <- function(dat,
                        coef.text.size = 1,
                        color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
                        out.file.png = NULL,
-                       pvalthresh = .05){
+                       pvalthresh = .05,
+                       ...){
   coef.state <- ifelse(add.coef, 'black', NULL)
   color.scheme <- match.arg(color.scheme)
   corr.colors <- khroma::color(color.scheme)
@@ -49,7 +51,8 @@ mycorrplot <- function(dat,
                        tl.cex = axis.text.size,
                        number.cex = coef.text.size,
                        bg = "light grey",
-                       addgrid.col = "black")
+                       addgrid.col = "black",
+                       ...)
     dev.off()
   } else {
     corrplot::corrplot(m,
@@ -66,7 +69,8 @@ mycorrplot <- function(dat,
                        tl.cex = axis.text.size,
                        number.cex = coef.text.size,
                        bg = "light grey",
-                       addgrid.col = "black")
+                       addgrid.col = "black",
+                       ...)
   }
 }
 
