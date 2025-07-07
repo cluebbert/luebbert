@@ -25,7 +25,7 @@ mycorrplot <- function(dat,
                        out.file.png = NULL,
                        pvalthresh = .05,
                        ...){
-  coef.state <- ifelse(add.coef, 'black', NULL)
+  coef.state <- switch(add.coef, "black", NULL)
   color.scheme <- match.arg(color.scheme)
   corr.colors <- khroma::color(color.scheme)
   m <- cor(dat, use = use)
