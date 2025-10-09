@@ -19,7 +19,7 @@
 mycorrplot <- function(dat,
                        use = "pairwise.complete",
                        axis.text.size = 1,
-                       add.coef = F,
+                       add.coef = FALSE,
                        coef.text.size = 1,
                        color.scheme = c("sunset", "BuRd", "nightfall", "PRGn"),
                        out.file.png = NULL,

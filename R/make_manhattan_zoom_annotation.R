@@ -13,7 +13,6 @@
 #' @param gene.highlight name of column that indicates which genes to highlight, column should be boolean, T is displayed red
 #'
 #' @return outputs 1 plot per row of top.hits table
-#' @export
 #'
 #' @examples
 #' # no example

@@ -4,16 +4,27 @@
 \alias{make_ld}
 \title{Make a table of LD around a certain snp}
 \usage{
-make_ld(snp.name, window = 1000, bedfile, out.filepath = "./ld_out_temp")
+make_ld(
+  plink.path = "~/bin/plink",
+  snp.name,
+  window,
+  bedfile,
+  in.dir,
+  out.filepath = "ld_out_temp"
+)
 }
 \arguments{
+\item{plink.path}{path to plink 1.9 executable}
+
 \item{snp.name}{Name of snp around which to calculate LD}
 
 \item{window}{Window around snp in KB}
 
 \item{bedfile}{bedfile path, no .bed extension}
 
-\item{out.filepath}{path of outfile}
+\item{in.dir}{directory of bedfile}
+
+\item{out.filepath}{name/path of outfile}
 }
 \value{
 outputs table of LD, for use within plotting function mostly

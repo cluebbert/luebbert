@@ -1,0 +1,143 @@
+# make sideways manhattan plot
+# set up to handle results from multiple gwas
+
+# ------------------------------------------------------------------------\
+# unexported functions --------
+# ------------------------------------------------------------------------\
+
+# extract position from marker.ID in the form "CHR-POS"
+get_bp_from_id <- function(marker.ID){
+  as.numeric(stringr::str_extract(marker.ID, "-(.*)", group = 1))
+}
+
+# ------------------------------------------------------------------------\
+# main function --------
+# ------------------------------------------------------------------------\
+
+#' Make sideways manhattan plot for building locus zoom. Receives output from multiple gwas models.
+#'
+#' @param gwas.res table of all gwas results, should contain columns (CHR, POS, PVAL), corresponding to (chromosome, physical position, and pvalue).
+#' @param qtl.df table with same columns that includes only significant hits in a qtl. QTL are typically defined as hits grouped by LD by something like `plink --clump`
+#' @param pvals.in.log boolean, are pvalues in input data.frames in -log10(p)?
+#' @param plot.r2.thresh minimum LD with qtl snps to plot snps colored by LD. SNPs below are plotted in grey.
+#' @param ld.list output of [luebbert::get_ld_in_window_multi]
+#' @param window kilobases on either side of top QTL snp to plot
+#' @param sig.line -log10(p) value to draw line on plot
+#' @param unique.gwas.model.variable string indicating column name that corresponds to unique gwas models in the qtl.df
+#' @param sig.hit.color.var Optional. String indicating a column that will color significant hits.
+#' @param sig.hit.shape.var Optional. String indicating a column that will change shape of significant hits.
+#' @param shape.scale Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.
+#'
+#' @returns
+#' GGplot of manhattan plot with points colored by maximum R2 to markers in the qtl.df. Only results from gwas models present in the qtl are plotted.
+#' @export
+#'
+#' @examples
+#' # Work in progress
+make_sideways_manhattan_multi <- function(gwas.res,
+                                          qtl.df,
+                                          pvals.in.log = TRUE,
+                                          plot.r2.thresh = .2,
+                                          ld.list,
+                                          window,
+                                          sig.line,
+                                          unique.gwas.model.variable = NULL,
+                                          sig.hit.color.var = NULL,
+                                          sig.hit.shape.var = NULL,
+                                          shape.scale = NULL){
+  # define plot colors
+  my.colors <- viridis::viridis_pal(option = "turbo")(5)
+
+  chrom <- unique(qtl.df$CHR)
+
+  gwas.sub_alltraits <- gwas.res %>%
+    filter(.data$CHR == chrom) %>%
+    mutate(marker.ID = paste(.data$CHR, .data$POS, sep = "-")) %>%
+    # filter(between(physical.pos, this.pos - window * 1000, this.pos + window * 1000)) %>%
+    left_join(ld.list$table, by = "marker.ID") %>%
+    filter(!is.na(.data$R2))
+  # for rug plot
+  marker.list.in.window <- ld.list$table %>%
+    mutate(POS = get_bp_from_id(.data$marker.ID)) %>%
+    select("marker.ID", "POS") %>%
+    distinct()
+
+  # Get only hits that are from traits in the clump
+  if(!is.null(unique.gwas.model.variable)){
+    gwas.sub <- gwas.sub_alltraits %>%
+      filter(.data[[unique.gwas.model.variable]] %in% unique(qtl.df[,unique.gwas.model.variable]))
+  } else {
+    gwas.sub <- gwas.sub_alltraits
+  }
+
+  # make manhattan
+  plot.df <- gwas.sub %>%
+    # alpha scale
+    mutate(how.to.plot = case_when(.data$R2 > plot.r2.thresh ~ 1,
+                                   TRUE ~ .4)) %>%
+    # color scale
+    mutate(plot.R2 = case_when(.data$R2 < plot.r2.thresh ~ NA,
+                               TRUE ~ .data$R2))
+
+  # change pvalue if needed
+  if(!pvals.in.log){
+    plot.df <- plot.df %>%
+      mutate(PVAL = -log10(.data$PVAL))
+  }
+
+  # how far to spread labels past ends, in percentage
+  y.spread.expansion <- .1
+  y.spread.factors <- c(1 + y.spread.expansion, 1 - y.spread.expansion)
+  y.spread.factor.window <- (window * y.spread.expansion) * 1000
+
+  # plot limits
+  this.pos <- get_bp_from_id(ld.list$key.snp)
+  plot.limits <- c(this.pos + window * 1000, this.pos - window * 1000)
+  plot.limits.ex <- c(plot.limits[1] + y.spread.factor.window, plot.limits[2] - y.spread.factor.window)
+
+  # Base plot
+  man <-
+    ggplot(aes(x = .data$POS, y = .data$PVAL), data = plot.df) +
+    geom_point(aes(color = .data$plot.R2, alpha = .data$how.to.plot), shape = 16) +
+    scale_alpha(guide = "none") +
+    scale_color_stepsn(colors = my.colors, name = "R2") +
+    # shape.scale +
+    scale_x_reverse(limits = plot.limits.ex,
+                    labels = scales::label_number(scale_cut = scales::cut_short_scale()),
+                    name = "-log10pval") +
+    coord_flip() +
+    scale_y_reverse() +
+    theme(panel.background = element_rect(fill = "grey95"),
+          axis.title.y = element_blank(),
+          legend.position = "left",
+          legend.justification = "top",
+          panel.grid = element_blank()) +
+    labs(y = bquote(-log[10](p-value))) +
+    geom_rug(aes(x = .data$POS), sides = 't', data = marker.list.in.window, inherit.aes = F) +
+    geom_hline(yintercept = sig.line, linetype = 'dashed')
+  # final plot
+  if(!is.null(sig.hit.color.var) & !is.null(sig.hit.shape.var)){
+    man <- man +
+      geom_point(aes(x = .data$POS, y = .data$PVAL, fill = .data[[sig.hit.color.var]], shape = .data[[sig.hit.shape.var]]), data = qtl.df, size = 4) +
+      guides(fill = guide_legend(override.aes = list(shape=21)))
+    if(!is.null(shape.scale)){
+      man <- man +
+        shape.scale
+    }
+  } else if(!is.null(sig.hit.shape.var)){
+    man <- man +
+      geom_point(aes(x = .data$POS, y = .data$PVAL, shape = .data[[sig.hit.shape.var]]), data = qtl.df, size = 4)
+    if(!is.null(shape.scale)){
+      man <- man +
+        shape.scale
+    }
+  } else if(!is.null(sig.hit.color.var)){
+    man <- man +
+      geom_point(aes(x = .data$POS, y = .data$PVAL, fill = .data[[sig.hit.color.var]]), data = qtl.df, size = 4, shape = 21)
+  } else {
+    man <- man +
+      geom_point(aes(x = .data$POS, y = .data$PVAL), fill = 'black', data = qtl.df, size = 4, show.legend = F)
+
+  }
+  return(man)
+}
