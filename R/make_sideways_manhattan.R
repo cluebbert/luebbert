@@ -94,6 +94,7 @@ make_sideways_manhattan <- function(gwas.res,
     ) +
     coord_flip() +
     scale_y_reverse() +
+    theme_bw() +
     theme(
       panel.background = element_rect(fill = "grey95"),
       axis.title.y = element_blank(),

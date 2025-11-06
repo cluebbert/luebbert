@@ -107,6 +107,7 @@ make_sideways_manhattan_multi <- function(gwas.res,
                     name = "-log10pval") +
     coord_flip() +
     scale_y_reverse() +
+    theme_bw() +
     theme(panel.background = element_rect(fill = "grey95"),
           axis.title.y = element_blank(),
           legend.position = "left",

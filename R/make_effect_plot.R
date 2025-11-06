@@ -88,6 +88,7 @@ make_effect_plot <- function(gwas.res,
     geom_point(aes(color = .data$plot.R2, alpha = .data$how.to.plot), shape = 16, show.legend = include.legend) +
     scale_color_stepsn(colors = my.colors, name = "R2") +
     geom_hline(yintercept = sig.line) +
+    theme_bw() +
     theme(panel.grid = element_blank()) +
     labs(y = bquote(-log[10](p-value)),
          x = "Effect Estimate") +

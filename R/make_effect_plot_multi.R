@@ -102,6 +102,7 @@ make_effect_plot_multi <- function(gwas.res,
     # shapeScale +
     scale_color_stepsn(colors = my.colors, name = "R2") +
     geom_hline(yintercept = sig.line) +
+    theme_bw() +
     theme(panel.grid = element_blank()) +
     labs(y = bquote(-log[10](p-value)),
          x = "Effect Estimate") +

@@ -94,6 +94,7 @@ make_gene_annotation_plot <- function(annotation.table,
                              padding.y = grid::unit(.1, "lines"),
                              min.size = 4) +
     geom_segment(aes(x = .5, xend = .55, y = .data$start, yend = .data$y.pos)) +
+    theme_bw() +
     theme(axis.text.x = element_blank(),
           axis.title.x = element_blank(),
           #axis.text.y = element_blank(),
