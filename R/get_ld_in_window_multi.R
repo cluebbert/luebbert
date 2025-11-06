@@ -83,7 +83,7 @@ get_ld_in_window_multi <- function(qtl.df,
     ld.table <- read.table("ld_out_temp.ld", header = T)
     ld.table_sub <- ld.table %>%
       select("marker.ID" = "SNP_B", "R2") %>%
-      mutate(group = .data$this.group)
+      mutate(group = this.group)
     ld.table_all <- bind_rows(ld.table_all, ld.table_sub)
   }
 
