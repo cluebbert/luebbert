@@ -44,7 +44,7 @@ get_ld_in_window_multi <- function(qtl.df,
   # clean up top hits table
   this.clump.df <- qtl.df %>%
     mutate(marker.ID = paste(.data$CHR, .data$POS, sep = "-")) %>%
-    rename(group = all_of("grouping.variable"))
+    rename(group = all_of(grouping.variable))
 
   # ensure pval in correct format
   if(!pvals.in.log){
