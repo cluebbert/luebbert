@@ -11,7 +11,8 @@ get_ld_in_window_multi(
   geno.bed,
   in.dir,
   pvals.in.log,
-  grouping.variable
+  grouping.variable,
+  top.only = T
 )
 }
 \arguments{
@@ -28,11 +29,13 @@ get_ld_in_window_multi(
 \item{pvals.in.log}{boolean, are pvalues in input data.frames in -log10(p)?}
 
 \item{grouping.variable}{string indicating column name that corresponds to unique gwas models in the qtl.df}
+
+\item{top.only}{calculate LD for top p-value snps in each grouping.variable (T) or all snps in qtl.df (F)}
 }
 \value{
 Named list with 2 items
 \itemize{
-\item table: table with marker.IDs (CHR-POS) and maximum LD in R2 for each snp to the snps in the qtl.df
+\item table: table with marker.IDs (CHR-POS) and maximum LD (R2) for each snp in window to the snps (top or all) in the qtl.df
 \item key.snp: marker.ID corresponding to the middle of the window
 }
 }

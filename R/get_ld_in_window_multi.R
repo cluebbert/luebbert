@@ -24,10 +24,11 @@
 #' @param in.dir directory where genotype files are located
 #' @param pvals.in.log boolean, are pvalues in input data.frames in -log10(p)?
 #' @param grouping.variable string indicating column name that corresponds to unique gwas models in the qtl.df
+#' @param top.only calculate LD for top p-value snps in each grouping.variable (T) or all snps in qtl.df (F)
 #'
 #' @returns
 #' Named list with 2 items
-#'  - table: table with marker.IDs (CHR-POS) and maximum LD in R2 for each snp to the snps in the qtl.df
+#'  - table: table with marker.IDs (CHR-POS) and maximum LD (R2) for each snp in window to the snps (top or all) in the qtl.df
 #'  - key.snp: marker.ID corresponding to the middle of the window
 #' @export
 #'
@@ -39,46 +40,53 @@ get_ld_in_window_multi <- function(qtl.df,
                                    geno.bed,
                                    in.dir,
                                    pvals.in.log,
-                                   grouping.variable){
+                                   grouping.variable,
+                                   top.only = T){
 
   # clean up top hits table
   this.clump.df <- qtl.df %>%
     mutate(marker.ID = paste(.data$CHR, .data$POS, sep = "-")) %>%
     rename(group = all_of(grouping.variable))
 
+  # store chromosome
+  this.chrom <- unique(this.clump.df$CHR)
+
   # ensure pval in correct format
   if(!pvals.in.log){
     this.clump.df$PVAL <- -log10(this.clump.df$PVAL)
   }
 
+  # get key snp from clumping (max pvalue in clump), will be middle of mindow
   # Might be a tie here sometimes if top snp has two traits with same pvalue, I think the [1] solves it
   key.snp <- this.clump.df$marker.ID[which.max(this.clump.df$PVAL)[1]]
 
-  this.chrom <- unique(this.clump.df$CHR)
-
-  # If multiple traits hit same key snp, need to use unique to get just 1 value
+  ## If multiple traits hit same key snp, need to use unique to get just 1 value
   this.pos <- unique(this.clump.df$POS[which(this.clump.df$marker.ID == key.snp)])
   this.snp.name <- key.snp
 
-  # get only the top snp for each grouping variable
-  this.top.df <- this.clump.df %>%
-    group_by(.data$group) %>%
-    mutate(is.top.pval = .data$PVAL == max(.data$PVAL)) %>%
-    filter(.data$is.top.pval) %>%
-    # there are some snps that have exactly the same pvalue
-    mutate(snp.number = 1:n()) %>%
-    filter(.data$snp.number == 1) %>%
-    select(-"snp.number")
+  # get only the top snp for each grouping variable or take everything
+  if(top.only){
+    this.ldinput.df <- this.clump.df %>%
+      group_by(.data$group) %>%
+      mutate(is.top.pval = .data$PVAL == max(.data$PVAL)) %>%
+      filter(.data$is.top.pval) %>%
+      # there are some snps that have exactly the same pvalue
+      mutate(snp.number = 1:n()) %>%
+      filter(.data$snp.number == 1) %>%
+      select(-"snp.number")
+  } else {
+    this.ldinput.df <- this.clump.df
+  }
 
   ld.table_all <- data.frame()
 
-  for(i in 1:nrow(this.top.df)){
+  for(i in 1:nrow(this.ldinput.df)){
 
-    this.snp.name <- this.top.df$marker.ID[i]
+    this.snp.name <- this.ldinput.df$marker.ID[i]
 
     make_ld(plink.path, this.snp.name, window, geno.bed, in.dir)
 
-    this.group <- this.top.df$group[i]
+    this.group <- this.ldinput.df$group[i]
 
     ld.table <- read.table("ld_out_temp.ld", header = T)
     ld.table_sub <- ld.table %>%
