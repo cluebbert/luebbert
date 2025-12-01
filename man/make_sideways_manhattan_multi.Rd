@@ -33,11 +33,11 @@ make_sideways_manhattan_multi(
 
 \item{sig.line}{-log10(p) value to draw line on plot}
 
-\item{unique.gwas.model.variable}{string indicating column name that corresponds to unique gwas models in the qtl.df}
+\item{unique.gwas.model.variable}{string indicating column name in gwas.res and qtl.df that corresponds to unique gwas models (e.g. phenotype within a location). See \link[luebbert]{get_ld_in_window_multi} for usage in LD calculation.}
 
-\item{sig.hit.color.var}{Optional. String indicating a column that will color significant hits.}
+\item{sig.hit.color.var}{Optional. String indicating a column in gwas.res and qtl.df that will color significant hits. (e.g. a phenotype or location)}
 
-\item{sig.hit.shape.var}{Optional. String indicating a column that will change shape of significant hits.}
+\item{sig.hit.shape.var}{Optional. String indicating a column in gwas.res and qtl.df that will change shape of significant hits. (e.g. a phenotype or location)}
 
 \item{shape.scale}{Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.}
 }

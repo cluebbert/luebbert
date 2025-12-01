@@ -17,15 +17,15 @@
 #' @param window kilobases on either side of top QTL snp to plot.
 #' @param sig.line -log10(p) value to draw line on plot.
 #' @param plot.title Optional. Title of plot.
-#' @param unique.gwas.model.variable string indicating column name that corresponds to unique gwas models in the qtl.df
-#' @param sig.hit.color.var Optional. String indicating a column that will color significant hits.
-#' @param sig.hit.shape.var Optional. String indicating a column that will change shape of significant hits.
+#' @param unique.gwas.model.variable string indicating column name in gwas.res and qtl.df that corresponds to unique gwas models (e.g. phenotype within a location). See [luebbert::get_ld_in_window_multi] for usage in LD calculation.
+#' @param sig.hit.color.var Optional. String indicating a column in gwas.res and qtl.df that will color significant hits. (e.g. a phenotype or location)
+#' @param sig.hit.shape.var Optional. String indicating a column in gwas.res and qtl.df that will change shape of significant hits. (e.g. a phenotype or location)
 #' @param shape.scale Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.
 #' @param include.gene.id boolean, include geneID in gene annotations or not
 #' @param plot.effect boolean, include plot of pvalues vs effect size? If TRUE, `gwas.res` and `qtl.df` must have column `EFF` that conatins gwas effect sizes.
 #'
 #' @returns
-#' GGplot of locus zoom style plot with points colored by maximum R2 to markers in the qtl.df. Only results from gwas models present in the qtl are plotted. Alongside are annotations of nearby genes.
+#' GGplot of locus zoom style plot with points colored by maximum R2 to markers in the qtl.df. Only results from `unique.gwas.model.variable` present in the qtl are plotted. Alongside are annotations of nearby genes.
 #' @export
 #'
 #' @examples

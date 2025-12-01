@@ -47,11 +47,11 @@ locus_zoom_multi(
 
 \item{plot.title}{Optional. Title of plot.}
 
-\item{unique.gwas.model.variable}{string indicating column name that corresponds to unique gwas models in the qtl.df}
+\item{unique.gwas.model.variable}{string indicating column name in gwas.res and qtl.df that corresponds to unique gwas models (e.g. phenotype within a location). See \link{get_ld_in_window_multi} for usage in LD calculation.}
 
-\item{sig.hit.color.var}{Optional. String indicating a column that will color significant hits.}
+\item{sig.hit.color.var}{Optional. String indicating a column in gwas.res and qtl.df that will color significant hits. (e.g. a phenotype or location)}
 
-\item{sig.hit.shape.var}{Optional. String indicating a column that will change shape of significant hits.}
+\item{sig.hit.shape.var}{Optional. String indicating a column in gwas.res and qtl.df that will change shape of significant hits. (e.g. a phenotype or location)}
 
 \item{shape.scale}{Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.}
 
@@ -62,7 +62,7 @@ locus_zoom_multi(
 \item{geno.bed}{prefix of genotype files in plink (bed/bim/fam) format.}
 }
 \value{
-GGplot of locus zoom style plot with points colored by maximum R2 to markers in the qtl.df. Only results from gwas models present in the qtl are plotted. Alongside are annotations of nearby genes.
+GGplot of locus zoom style plot with points colored by maximum R2 to markers in the qtl.df. Only results from \code{unique.gwas.model.variable} present in the qtl are plotted. Alongside are annotations of nearby genes.
 }
 \description{
 Make a locus zoom style plot with points colored by R2 to a qtl and nearby genes annotated. Takes gwas output from multiple gwas models.
