@@ -8,7 +8,9 @@ make_gene_annotation_plot(
   annotation.table,
   middle.snp,
   window,
-  include.id = FALSE
+  include.id = F,
+  highlight.ids = NULL,
+  highlight.color = "red"
 )
 }
 \arguments{
@@ -16,9 +18,13 @@ make_gene_annotation_plot(
 
 \item{middle.snp}{character, SNP name in form "CHR-POS" center of window. Often the key.snp output of \link{get_ld_in_window_multi}}
 
-\item{window}{kilobases on either side of middle.snp to plot}
+\item{window}{integer, kilobases on either side of middle.snp to plot}
 
 \item{include.id}{boolean, include geneID in gene annotations or not}
+
+\item{highlight.ids}{character, optional, vector of ids to highlight}
+
+\item{highlight.color}{character, optional, color to highlight ids}
 }
 \description{
 Title
