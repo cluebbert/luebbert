@@ -100,8 +100,14 @@ make_sideways_manhattan_multi <- function(gwas.res,
     ggplot(aes(x = .data$POS, y = .data$PVAL), data = plot.df) +
     geom_point(aes(color = .data$plot.R2, alpha = .data$how.to.plot), shape = 16) +
     scale_alpha(guide = "none") +
-    scale_color_stepsn(colors = my.colors, name = "R2") +
-    # shape.scale +
+    binned_scale(aesthetics = "color",
+                 name = "R2 \n",
+                 palette = function(x) c("#43638E", "#88DAA0", "#DBC32D", "#B94712"),
+                 limits = c(plot.r2.thresh, 1),
+                 breaks = seq(plot.r2.thresh, 1, length.out = 5)[-c(1,5)],
+                 show.limits = T,
+                 guide = "colorsteps",
+                 na.value = "grey50") +
     scale_x_reverse(limits = plot.limits.ex,
                     labels = scales::label_number(scale_cut = scales::cut_short_scale()),
                     name = "-log10pval") +
