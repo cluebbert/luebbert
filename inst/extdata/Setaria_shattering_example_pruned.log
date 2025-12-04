@@ -1,0 +1,27 @@
+PLINK v2.00a6LM AVX2 Intel (26 May 2024)
+Options in effect:
+  --bfile /scratch/example_data/Setaria_shattering_example
+  --extract plink2.prune.in
+  --make-bed
+  --out /scratch/example_data/Setaria_shattering_example_pruned
+
+Hostname: ip-10-0-141-194.us-east-2.compute.internal
+Working directory: /scratch
+Start time: Thu Dec  4 21:48:52 2025
+
+Random number seed: 1764884932
+62938 MiB RAM detected, ~61822 available; reserving 31469 MiB for main
+workspace.
+Using up to 8 compute threads.
+215 samples (0 females, 0 males, 215 ambiguous; 215 founders) loaded from
+/scratch/example_data/Setaria_shattering_example.fam.
+48969 variants loaded from
+/scratch/example_data/Setaria_shattering_example.bim.
+Note: No phenotype data present.
+--extract: 13102 variants remaining.
+13102 variants remaining after main filters.
+Writing /scratch/example_data/Setaria_shattering_example_pruned.fam ... done.
+Writing /scratch/example_data/Setaria_shattering_example_pruned.bim ... done.
+Writing /scratch/example_data/Setaria_shattering_example_pruned.bed ... done.
+
+End time: Thu Dec  4 21:48:52 2025
