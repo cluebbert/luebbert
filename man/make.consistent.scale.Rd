@@ -9,7 +9,7 @@ make.consistent.scale(
   vars,
   type = c("fill", "color", "shape"),
   show.example = F,
-  name = waiver()
+  name = NULL
 )
 }
 \arguments{

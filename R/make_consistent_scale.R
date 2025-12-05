@@ -15,9 +15,13 @@ make.consistent.scale <- function(values,
                                   vars,
                                   type = c("fill", "color", "shape"),
                                   show.example = F,
-                                  name = waiver()) {
+                                  name = NULL) {
   if(length(values) != length(vars)){
     stop("Values and variables should be same length.")
+  }
+
+  if(is.null(name)){
+    name <- ggplot2::waiver()
   }
 
   names(values) <- levels(as.factor(vars))
@@ -37,10 +41,10 @@ make.consistent.scale <- function(values,
     if(show.example){
       x <- data.frame(shape = values, label = names(values), x.coord = seq(1, length(values), by = 1))
       p <-
-        ggplot(aes(x = x.coord, y = 1), data = x) +
-        geom_point(aes(shape = factor(shape, levels=shape)), show.legend =  F, size = 20, fill = "orange") +
+        ggplot(aes(x = .data$x.coord, y = 1), data = x) +
+        geom_point(aes(shape = factor(.data$shape, levels=.data$shape)), show.legend =  F, size = 20, fill = "orange") +
         scale_shape_manual(values = x$shape) +
-        geom_text(aes(label = label, y = 2), size = 8) +
+        geom_text(aes(label = .data$label, y = 2), size = 8) +
         theme_void() +
         theme(plot.margin = unit(rep(2,4), "cm")) +
         coord_cartesian(clip = "off") +
@@ -52,3 +56,5 @@ make.consistent.scale <- function(values,
   }
   return(out)
 }
+
+

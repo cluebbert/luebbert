@@ -109,7 +109,7 @@ make_gene_annotation_plot <- function(annotation.table,
 
   if(!is.null(highlight.ids)){
     anno <- anno +
-      ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = y.pos, label = plot.label, color = gene.label.color),
+      ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = .data$y.pos, label = .data$plot.label, color = .data$gene.label.color),
                                place = "left",
                                #grow = TRUE,
                                hjust = 0,
@@ -119,7 +119,7 @@ make_gene_annotation_plot <- function(annotation.table,
       scale_color_manual(values = c(highlight.color, "black"))
   } else {
     anno <- anno +
-      ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = y.pos, label = plot.label),
+      ggfittext::geom_fit_text(aes(xmin = .55, xmax = .85, y = .data$y.pos, label = .data$plot.label),
                                place = "left",
                                #grow = TRUE,
                                hjust = 0,

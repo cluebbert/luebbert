@@ -5,15 +5,19 @@
 \title{Assign snps to clumps based on LD after gwas}
 \usage{
 make_clumps(
-  geno.bed,
+  geno.bed.filename,
+  geno.bed.dir,
   gwas.res,
   pvals.in.log = T,
   window = 500,
-  ld.thresh = 0.5
+  ld.thresh = 0.5,
+  plink.path
 )
 }
 \arguments{
-\item{geno.bed}{character, bedfile path, no .bed extension}
+\item{geno.bed.filename}{character, filename of genotype bedfile, no .bed extension}
+
+\item{geno.bed.dir}{character, path to directory where bed/bim/fam files exist, include trailing "/"}
 
 \item{gwas.res}{data.frame, table of gwas results with columns (marker.ID, CHR, POS, PVAL)}
 
@@ -22,6 +26,8 @@ make_clumps(
 \item{window}{integer, window in kilobases either side of snp to look for snps in LD,}
 
 \item{ld.thresh}{numeric, R2 threshold above which snps will be grouped}
+
+\item{plink.path}{path to plink 1.9 executable}
 }
 \value{
 table with columns marker.ID and clump_num. Clump_num indicates groupings, numberings start from the larges pvalue to smallest. May want to reassign afterwards to be along the genome.

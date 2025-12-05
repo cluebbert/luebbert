@@ -4,8 +4,8 @@
 #' @param snp.name Name of snp around which to calculate LD
 #' @param window Window around snp in KB
 #' @param bedfile bedfile path, no .bed extension
-#' @param in.dir directory of bedfile
-#' @param out.filepath name/path of outfile
+#' @param in.dir directory of bedfile, include trailing "/"
+#' @param out.filepath name and path of outfile
 #'
 #' @return outputs table of LD, for use within plotting function mostly
 #' @export

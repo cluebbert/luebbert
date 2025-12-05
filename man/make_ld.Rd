@@ -22,9 +22,9 @@ make_ld(
 
 \item{bedfile}{bedfile path, no .bed extension}
 
-\item{in.dir}{directory of bedfile}
+\item{in.dir}{directory of bedfile, include trailing "/"}
 
-\item{out.filepath}{name/path of outfile}
+\item{out.filepath}{name and path of outfile}
 }
 \value{
 outputs table of LD, for use within plotting function mostly
