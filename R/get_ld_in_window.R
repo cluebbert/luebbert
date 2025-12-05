@@ -70,6 +70,7 @@ get_ld_in_window <- function(qtl.df,
   ld.table_all <- data.frame()
 
   message(paste("Calculating LD to", nrow(this.clump.df), "snps."))
+  pb <- txtProgressBar(min = 1, max = nrow(this.clump.df), style = 3)
   for(i in 1:nrow(this.clump.df)){
 
     this.snp.name <- this.clump.df$marker.ID[i]
@@ -81,7 +82,9 @@ get_ld_in_window <- function(qtl.df,
     ld.table_sub <- ld.table %>%
       select("marker.ID" = "SNP_B", "R2")
     ld.table_all <- bind_rows(ld.table_all, ld.table_sub)
+    setTxtProgressBar(pb, i)
   }
+  close(pb)
 
   ld.table_all_topR <- ld.table_all %>%
     group_by(.data$marker.ID) %>%
