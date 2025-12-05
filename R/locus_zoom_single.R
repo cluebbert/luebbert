@@ -41,6 +41,7 @@ locus_zoom_single <- function(gwas.res,
                               include.gene.id = F,
                               plot.effect = T) {
   # make ld table
+  message("Calculating LD")
   ld.list <- get_ld_in_window(qtl.df,
                               window,
                               plink.path,
@@ -49,6 +50,7 @@ locus_zoom_single <- function(gwas.res,
                               pvals.in.log)
 
   # make manhattan
+  message("Making manhattan")
   man <- make_sideways_manhattan(gwas.res,
                                  qtl.df,
                                  pvals.in.log,

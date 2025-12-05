@@ -69,6 +69,7 @@ get_ld_in_window <- function(qtl.df,
 
   ld.table_all <- data.frame()
 
+  message(paste("Calculating LD to", nrow(this.clump.df), "snps."))
   for(i in 1:nrow(this.clump.df)){
 
     this.snp.name <- this.clump.df$marker.ID[i]
