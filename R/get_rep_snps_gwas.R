@@ -1,4 +1,4 @@
-#' Title
+#' Get snps that represent LD blocks using pvalues
 #'
 #' @param bed.file path to bedfile, with .bed extension, need .bim and .fam in directory too
 #' @param gwas.res.table table that contains pvalues, will be subset
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' # no example
-clump_gwas_results <- function(bed.file, gwas.res.table, pval.column, r2thresh = .2, window.size = 1000){
+get_rep_snps_gwas <- function(bed.file, gwas.res.table, pval.column, r2thresh = .2, window.size = 1000){
   bed.in <- bigsnpr::bed(bed.file)
   x <- bigsnpr::bed_clumping(obj.bed = bed.in,
                              S = -log10(gwas.res.table[,pval.column]),
