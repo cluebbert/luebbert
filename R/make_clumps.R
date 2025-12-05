@@ -64,7 +64,7 @@ make_clumps <- function(geno.bed.filename,
       out <- bind_rows(out, this.out)
       snps.to.test <- snps.to.test[-which(snps.to.test %in% this.out$snp)]
       i <- i+1
-      print(paste(length(snps.to.test), "snps remaining."))
+      setTxtProgressBar(pb, pb.end.value - length(snps.to.test))
 
     } else {
 
