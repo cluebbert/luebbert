@@ -59,7 +59,7 @@ make_clumps <- function(geno.bed.filename,
       filter(between(.data$POS, pos.range[1], pos.range[2]))
 
     if(nrow(snps.in.range) < 2){
-      this.out <- data.frame(snp = this.snp.info$SNP,
+      this.out <- data.frame(marker.ID = this.snp.info$SNP,
                              clump_num = i)
       out <- bind_rows(out, this.out)
       snps.to.test <- snps.to.test[-which(snps.to.test %in% this.out$snp)]
