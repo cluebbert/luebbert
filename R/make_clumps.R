@@ -62,7 +62,7 @@ make_clumps <- function(geno.bed.filename,
       this.out <- data.frame(marker.ID = this.snp.info$SNP,
                              clump_num = i)
       out <- bind_rows(out, this.out)
-      snps.to.test <- snps.to.test[-which(snps.to.test %in% this.out$snp)]
+      snps.to.test <- snps.to.test[-which(snps.to.test %in% this.out$marker.ID)]
       i <- i+1
       setTxtProgressBar(pb, pb.end.value - length(snps.to.test))
 
@@ -90,6 +90,7 @@ make_clumps <- function(geno.bed.filename,
       setTxtProgressBar(pb, pb.end.value - length(snps.to.test))
     }
   }
+  close(pb)
 
   return(out)
 }
