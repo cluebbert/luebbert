@@ -37,7 +37,8 @@ get_ld_in_window <- function(qtl.df,
                              plink.path,
                              geno.bed,
                              in.dir,
-                             pvals.in.log){
+                             pvals.in.log,
+                             verbose = T){
 
   # clean up top hits table
   this.clump.df <- qtl.df %>%
@@ -69,8 +70,14 @@ get_ld_in_window <- function(qtl.df,
 
   ld.table_all <- data.frame()
 
-  message(paste("Calculating LD to", nrow(this.clump.df), "snps."))
-  pb <- txtProgressBar(min = 1, max = nrow(this.clump.df), style = 3)
+  do.progress <- nrow(this.clump.df) > 1 & verbose
+
+  if(verbose){
+    message(paste("Calculating LD to", nrow(this.clump.df), "snps."))
+  }
+  if(do.progress){
+    pb <- txtProgressBar(min = 1, max = nrow(this.clump.df), style = 3)
+  }
   for(i in 1:nrow(this.clump.df)){
 
     this.snp.name <- this.clump.df$marker.ID[i]
@@ -82,7 +89,9 @@ get_ld_in_window <- function(qtl.df,
     ld.table_sub <- ld.table %>%
       select("marker.ID" = "SNP_B", "R2")
     ld.table_all <- bind_rows(ld.table_all, ld.table_sub)
-    setTxtProgressBar(pb, i)
+    if(do.progress){
+      setTxtProgressBar(pb, i)
+    }
   }
   close(pb)
 
