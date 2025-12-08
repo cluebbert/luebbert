@@ -93,7 +93,9 @@ get_ld_in_window <- function(qtl.df,
       setTxtProgressBar(pb, i)
     }
   }
-  close(pb)
+  if(do.progress){
+    close(pb)
+  }
 
   ld.table_all_topR <- ld.table_all %>%
     group_by(.data$marker.ID) %>%
