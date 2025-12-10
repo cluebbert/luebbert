@@ -83,9 +83,9 @@ make_sideways_manhattan <- function(gwas.res,
   # Base plot
   man <-
     ggplot(aes(x = .data$POS, y = .data$PVAL), data = plot.df) +
-    geom_point(aes(color = .data$plot.R2, alpha = .data$how.to.plot), shape = 16) +
+    geom_point(aes(fill = .data$plot.R2, alpha = .data$how.to.plot), size = 3, shape = 21, color = "black") +
     scale_alpha(guide = "none") +
-    binned_scale(aesthetics = "color",
+    binned_scale(aesthetics = "fill",
                  name = "R2 \n",
                  palette = function(x) c("#43638E", "#88DAA0", "#DBC32D", "#B94712"),
                  limits = c(plot.r2.thresh, 1),
