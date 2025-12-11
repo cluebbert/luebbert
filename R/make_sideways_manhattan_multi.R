@@ -45,7 +45,7 @@ make_sideways_manhattan_multi <- function(gwas.res,
                                           unique.gwas.model.variable = NULL,
                                           sig.hit.color.var = NULL,
                                           sig.hit.shape.var = NULL,
-                                          single.variable.color = "black",
+                                          single.variable.color = NULL,
                                           shape.scale = NULL){
   # define plot colors
   my.colors <- viridis::viridis_pal(option = "turbo")(5)
@@ -143,10 +143,13 @@ make_sideways_manhattan_multi <- function(gwas.res,
   } else if(!is.null(sig.hit.color.var)){
     man <- man +
       geom_point(aes(x = .data$POS, y = .data$PVAL, fill = .data[[sig.hit.color.var]]), data = qtl.df, size = 4, shape = 21)
-  } else {
+  } else if(!is.null(single.variable.color)) {
     man <- man +
       geom_point(aes(x = .data$POS, y = .data$PVAL), fill = single.variable.color, data = qtl.df, size = 4, shape = 21, show.legend = F)
-
+  } else {
+    man <- man +
+      geom_point(aes(x = .data$POS, y = .data$PVAL), fill = .data$plot.R2, data = qtl.df, size = 4, shape = 21, show.legend = F)
   }
+
   return(man)
 }

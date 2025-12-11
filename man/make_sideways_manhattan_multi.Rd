@@ -15,7 +15,7 @@ make_sideways_manhattan_multi(
   unique.gwas.model.variable = NULL,
   sig.hit.color.var = NULL,
   sig.hit.shape.var = NULL,
-  single.variable.color = "black",
+  single.variable.color = NULL,
   shape.scale = NULL
 )
 }
