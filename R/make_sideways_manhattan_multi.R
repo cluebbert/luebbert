@@ -145,7 +145,7 @@ make_sideways_manhattan_multi <- function(gwas.res,
       geom_point(aes(x = .data$POS, y = .data$PVAL, fill = .data[[sig.hit.color.var]]), data = qtl.df, size = 4, shape = 21)
   } else {
     man <- man +
-      geom_point(aes(x = .data$POS, y = .data$PVAL), fill = single.variable.color, data = qtl.df, size = 4, show.legend = F)
+      geom_point(aes(x = .data$POS, y = .data$PVAL), fill = single.variable.color, data = qtl.df, size = 4, shape = 21, show.legend = F)
 
   }
   return(man)
