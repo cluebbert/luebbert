@@ -4,7 +4,15 @@
 \alias{get_ld_in_window}
 \title{Make a table of maximum R2 of a list of snps to all snps in a window. Takes gwas output from a single gwas model.}
 \usage{
-get_ld_in_window(qtl.df, window, plink.path, geno.bed, in.dir, pvals.in.log)
+get_ld_in_window(
+  qtl.df,
+  window,
+  plink.path,
+  geno.bed,
+  in.dir,
+  pvals.in.log,
+  verbose = T
+)
 }
 \arguments{
 \item{qtl.df}{table that includes only significant hits in a qtl with columns (CHR, POS, PVAL), corresponding to (chromosome, physical position, and pvalue). QTL are typically defined as hits grouped by LD by something like \code{plink --clump}}
@@ -18,6 +26,8 @@ get_ld_in_window(qtl.df, window, plink.path, geno.bed, in.dir, pvals.in.log)
 \item{in.dir}{directory where genotype files are located}
 
 \item{pvals.in.log}{boolean, are pvalues in input data.frames in -log10(p)?}
+
+\item{verbose}{boolean, display debugging info and progress bars?}
 }
 \value{
 Named list with 2 items

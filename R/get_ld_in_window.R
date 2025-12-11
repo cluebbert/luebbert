@@ -22,6 +22,7 @@
 #' @param geno.bed prefix of genotype files in plink (bed/bim/fam) format
 #' @param in.dir directory where genotype files are located
 #' @param pvals.in.log boolean, are pvalues in input data.frames in -log10(p)?
+#' @param verbose boolean, display debugging info and progress bars?
 #'
 #' @returns
 #' Named list with 2 items

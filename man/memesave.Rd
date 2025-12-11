@@ -27,11 +27,14 @@ memesave(
 
 \item{bg}{no transparent background pngs}
 
-\item{...}{extra arguments passed to ggplot2::ggsave()}
+\item{...}{extra arguments passed to \link[ggplot2:ggsave]{ggplot2::ggsave}}
 }
 \value{
 write plot
 }
 \description{
 GGsave for me! ggsave with some defaults
+}
+\examples{
+# work in progress
 }
