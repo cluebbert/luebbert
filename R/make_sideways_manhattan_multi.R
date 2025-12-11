@@ -26,6 +26,7 @@ get_bp_from_id <- function(marker.ID){
 #' @param unique.gwas.model.variable string indicating column name in gwas.res and qtl.df that corresponds to unique gwas models (e.g. phenotype within a location). See \link[luebbert]{get_ld_in_window_multi} for usage in LD calculation.
 #' @param sig.hit.color.var Optional. String indicating a column in gwas.res and qtl.df that will color significant hits. (e.g. a phenotype or location)
 #' @param sig.hit.shape.var Optional. String indicating a column in gwas.res and qtl.df that will change shape of significant hits. (e.g. a phenotype or location)
+#' @param single.variable.color Optional. a single color to plot qtl.df points as if there is no variable of interest
 #' @param shape.scale Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.
 #'
 #' @returns
@@ -44,6 +45,7 @@ make_sideways_manhattan_multi <- function(gwas.res,
                                           unique.gwas.model.variable = NULL,
                                           sig.hit.color.var = NULL,
                                           sig.hit.shape.var = NULL,
+                                          single.variable.color = "black",
                                           shape.scale = NULL){
   # define plot colors
   my.colors <- viridis::viridis_pal(option = "turbo")(5)
@@ -143,7 +145,7 @@ make_sideways_manhattan_multi <- function(gwas.res,
       geom_point(aes(x = .data$POS, y = .data$PVAL, fill = .data[[sig.hit.color.var]]), data = qtl.df, size = 4, shape = 21)
   } else {
     man <- man +
-      geom_point(aes(x = .data$POS, y = .data$PVAL), fill = 'black', data = qtl.df, size = 4, show.legend = F)
+      geom_point(aes(x = .data$POS, y = .data$PVAL), fill = single.variable.color, data = qtl.df, size = 4, show.legend = F)
 
   }
   return(man)
