@@ -15,6 +15,7 @@ make_sideways_manhattan_multi(
   unique.gwas.model.variable = NULL,
   sig.hit.color.var = NULL,
   sig.hit.shape.var = NULL,
+  single.variable.color = "black",
   shape.scale = NULL
 )
 }
@@ -38,6 +39,8 @@ make_sideways_manhattan_multi(
 \item{sig.hit.color.var}{Optional. String indicating a column in gwas.res and qtl.df that will color significant hits. (e.g. a phenotype or location)}
 
 \item{sig.hit.shape.var}{Optional. String indicating a column in gwas.res and qtl.df that will change shape of significant hits. (e.g. a phenotype or location)}
+
+\item{single.variable.color}{Optional. a single color to plot qtl.df points as if there is no variable of interest}
 
 \item{shape.scale}{Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.}
 }
