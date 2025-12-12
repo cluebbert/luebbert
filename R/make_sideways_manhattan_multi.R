@@ -148,7 +148,16 @@ make_sideways_manhattan_multi <- function(gwas.res,
       geom_point(aes(x = .data$POS, y = .data$PVAL), fill = single.variable.color, data = qtl.df, size = 4, shape = 21, show.legend = F)
   } else {
     man <- man +
-      geom_point(aes(x = .data$POS, y = .data$PVAL, fill = .data$plot.R2), data = qtl.df, size = 4, shape = 21, show.legend = F)
+      geom_point(aes(x = .data$POS, y = .data$PVAL, fill = .data$plot.R2), data = qtl.df, size = 4, shape = 21, show.legend = F) +
+      binned_scale(aesthetics = "fill",
+                   name = "R2 \n",
+                   palette = function(x) c("#43638E", "#88DAA0", "#DBC32D", "#B94712"),
+                   limits = c(plot.r2.thresh, 1),
+                   breaks = seq(plot.r2.thresh, 1, length.out = 5)[-c(1,5)],
+                   show.limits = T,
+                   guide = "colorsteps",
+                   na.value = "grey50") +
+
   }
 
   return(man)
