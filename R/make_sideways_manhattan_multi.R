@@ -156,7 +156,7 @@ make_sideways_manhattan_multi <- function(gwas.res,
                    breaks = seq(plot.r2.thresh, 1, length.out = 5)[-c(1,5)],
                    show.limits = T,
                    guide = "colorsteps",
-                   na.value = "grey50") +
+                   na.value = "grey50")
 
   }
 
