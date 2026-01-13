@@ -82,7 +82,7 @@ locus_zoom_single <- function(gwas.res,
   # make final plot
   if (plot.effect) {
     out <-
-      man + theme(plot.margin = ggplot2::margin(c(5.5, 5.5, 5.5, 120), unit = "points")) +
+      man + theme(plot.margin = ggplot2::margin(6, 6, 6, 120, unit = "points")) +
       patchwork::inset_element(
         effect.plot,
         left = .0,
@@ -98,7 +98,7 @@ locus_zoom_single <- function(gwas.res,
 
   } else {
     out <-
-      man + theme(plot.margin = ggplot2::margin(c(5.5, 5.5, 5.5, 120), unit = "points")) +
+      man + theme(plot.margin = ggplot2::margin(6, 6, 6, 6, unit = "points")) +
       anno +
       patchwork::plot_layout(nrow = 1, widths = c(4, 6)) +
       patchwork::plot_annotation(title = plot.title,
