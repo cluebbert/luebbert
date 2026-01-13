@@ -1,4 +1,4 @@
-#' Title get a gene's distance from a given snp
+#' get a gene's distance from a given snp
 #'
 #' @param s Snp physical position
 #' @param start gene start
