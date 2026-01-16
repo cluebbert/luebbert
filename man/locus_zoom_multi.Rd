@@ -20,6 +20,7 @@ locus_zoom_multi(
   sig.hit.color.var = NULL,
   sig.hit.shape.var = NULL,
   shape.scale = NULL,
+  single.variable.color = NULL,
   include.gene.id = FALSE,
   plot.effect = TRUE
 )
@@ -54,6 +55,8 @@ locus_zoom_multi(
 \item{sig.hit.shape.var}{Optional. String indicating a column in gwas.res and qtl.df that will change shape of significant hits. (e.g. a phenotype or location)}
 
 \item{shape.scale}{Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.}
+
+\item{single.variable.color}{Optional. a single color to plot qtl.df points as if there is no variable of interest}
 
 \item{include.gene.id}{boolean, include geneID in gene annotations or not}
 

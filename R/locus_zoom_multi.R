@@ -21,6 +21,7 @@
 #' @param sig.hit.color.var Optional. String indicating a column in gwas.res and qtl.df that will color significant hits. (e.g. a phenotype or location)
 #' @param sig.hit.shape.var Optional. String indicating a column in gwas.res and qtl.df that will change shape of significant hits. (e.g. a phenotype or location)
 #' @param shape.scale Optional. A defined shape scale to keep plotting of shapes consistent when all factors are note present. See another great function I made to do this.
+#' @param single.variable.color Optional. a single color to plot qtl.df points as if there is no variable of interest
 #' @param include.gene.id boolean, include geneID in gene annotations or not
 #' @param plot.effect boolean, include plot of pvalues vs effect size? If TRUE, `gwas.res` and `qtl.df` must have column `EFF` that conatins gwas effect sizes.
 #'
@@ -45,6 +46,7 @@ locus_zoom_multi <- function(gwas.res,
                              sig.hit.color.var = NULL,
                              sig.hit.shape.var = NULL,
                              shape.scale = NULL,
+                             single.variable.color = NULL,
                              include.gene.id = FALSE,
                              plot.effect = TRUE){
 
@@ -68,6 +70,7 @@ locus_zoom_multi <- function(gwas.res,
                                        unique.gwas.model.variable,
                                        sig.hit.color.var,
                                        sig.hit.shape.var,
+                                       single.variable.color,
                                        shape.scale)
 
   # make annotation

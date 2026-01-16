@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_gene_dist_from_snp.R
 \name{get_gene_dist_from_snp}
 \alias{get_gene_dist_from_snp}
-\title{Title get a gene's distance from a given snp}
+\title{get a gene's distance from a given snp}
 \usage{
 get_gene_dist_from_snp(s, start, end)
 }
@@ -17,7 +17,7 @@ get_gene_dist_from_snp(s, start, end)
 minimum distance the start or end of a gene is to the snp
 }
 \description{
-Title get a gene's distance from a given snp
+get a gene's distance from a given snp
 }
 \examples{
 # no example
