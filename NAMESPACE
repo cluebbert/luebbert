@@ -3,7 +3,6 @@
 export(get.varcomps)
 export(get_gene_dist_from_snp)
 export(get_gene_y_pos)
-export(get_ld_in_window)
 export(get_ld_in_window_multi)
 export(get_rep_snps_gwas)
 export(locus_zoom_multi)
